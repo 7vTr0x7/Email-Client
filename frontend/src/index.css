@@ -6,3 +6,11 @@
 .bg-color {
   background-color: #f4f5f9;
 }
+
+.border-color {
+  border: 1px solid #cfd2dc;
+}
+
+.text {
+  color: #636363;
+}

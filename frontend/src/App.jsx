@@ -3,7 +3,7 @@ import Emails from "./pages/Emails";
 
 const App = () => {
   return (
-    <main className="bg-color">
+    <main className="bg-color text">
       <Emails />
     </main>
   );
