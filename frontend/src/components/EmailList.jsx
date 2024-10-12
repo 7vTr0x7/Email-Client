@@ -22,17 +22,24 @@ const EmailList = () => {
     fetchEmails();
   }, []);
 
+  const isOpen = true;
+
   return (
     <>
-      {emails &&
-        emails.length > 0 &&
-        emails.map((email) => (
-          <div
-            key={email.id}
-            className="mb-3 d-flex gap-3 border-color px-4 py-2 rounded-2 bg-email">
-            <EmailCard email={email} />
-          </div>
-        ))}
+      <div className="row">
+        <div className="col-md-5">
+          {emails &&
+            emails.length > 0 &&
+            emails.map((email) => (
+              <div
+                key={email.id}
+                className="mb-3 d-flex gap-3 border-color px-4 py-2 rounded-2 bg-email">
+                <EmailCard email={email} isOpen={isOpen} />
+              </div>
+            ))}
+        </div>
+        <div className="col-md-7"></div>
+      </div>
     </>
   );
 };

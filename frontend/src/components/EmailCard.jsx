@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmailCard = ({ email }) => {
+const EmailCard = ({ email, isOpen }) => {
   const FirstChar = email?.from?.name?.charAt(0).toUpperCase();
   const date = new Date(email.date);
 
@@ -30,8 +30,12 @@ const EmailCard = ({ email }) => {
           Subject:
           <span className="fw-semibold"> {email.subject}</span>
         </p>
-        <p className="m-0">{email.short_description}</p>
-        <small className="mb-0 mt-1">{time}</small>
+        <p className="m-0">
+          {isOpen
+            ? `${email.short_description.slice(0, 50)}...`
+            : email.short_description}
+        </p>
+        <p className="mb-0 mt-1 small">{time}</p>
       </div>
     </>
   );
