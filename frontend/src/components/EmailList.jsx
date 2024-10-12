@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import EmailCard from "./EmailCard";
 
 const EmailList = () => {
   const [emails, setEmails] = useState([]);
@@ -26,7 +27,11 @@ const EmailList = () => {
       {emails &&
         emails.length > 0 &&
         emails.map((email) => (
-          <div key={email.id} className="mb-3 border-color px-2 py-1"></div>
+          <div
+            key={email.id}
+            className="mb-3 d-flex gap-3 border-color px-4 py-2 rounded-2 bg-email">
+            <EmailCard email={email} />
+          </div>
         ))}
     </>
   );
