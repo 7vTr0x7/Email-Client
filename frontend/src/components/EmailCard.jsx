@@ -1,23 +1,16 @@
 import React from "react";
+import { firstChar, getDate } from "../utils/constants";
 
 const EmailCard = ({ email, isOpen }) => {
-  const FirstChar = email?.from?.name?.charAt(0).toUpperCase();
-  const date = new Date(email.date);
+  const char = firstChar(email);
 
-  const time = date.toLocaleString("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  });
+  const time = getDate(email);
 
   return (
     <>
       <div>
         <p className="m-0 fw-semibold px-3 py-2  bg-accent rounded-circle text-white">
-          {FirstChar}
+          {char}
         </p>
       </div>
       <div>
