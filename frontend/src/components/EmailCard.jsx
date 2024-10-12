@@ -9,7 +9,7 @@ const EmailCard = ({ email, isOpen }) => {
   return (
     <>
       <div>
-        <p className="m-0 fw-semibold px-3 py-2  bg-accent rounded-circle text-white">
+        <p className="m-0 fs-4 px-3 py-1  bg-accent rounded-circle text-white">
           {char}
         </p>
       </div>

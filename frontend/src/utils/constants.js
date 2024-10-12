@@ -1,5 +1,5 @@
 export const getDate = (email) => {
-  const date = new Date(email.date);
+  const date = new Date(email?.date);
 
   const time = date.toLocaleString("en-US", {
     year: "numeric",
