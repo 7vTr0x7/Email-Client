@@ -17,7 +17,7 @@ const EmailBody = ({ email }) => {
       );
 
       const data = await res.json();
-      setEmailData(data);
+      setEmailData(data.body);
     } catch (error) {
       console.log(error);
     }
@@ -29,9 +29,9 @@ const EmailBody = ({ email }) => {
 
   return (
     <>
-      <div className="d-flex gap-4 py-3 px-2">
+      <div className="d-flex gap-4 py-4 px-4 border-color rounded-2 bg-email">
         <div>
-          <p className="m-0 fs-3 px-3 py-1  bg-accent rounded-circle text-white">
+          <p className="m-0 fs-4 px-3 py-1  bg-accent rounded-circle text-white">
             {char}
           </p>
         </div>
@@ -43,9 +43,11 @@ const EmailBody = ({ email }) => {
             </p>
           </div>
           <div>
-            <p className="mb-0 mt-3">{time}</p>
+            <p className="mb-0 mt-3">{time && time}</p>
           </div>
-          <div className="my-4">{parse(emailData?.body)}</div>
+          <div className="my-4">
+            {emailData ? parse(emailData) : "Loading..."}
+          </div>
         </div>
       </div>
     </>

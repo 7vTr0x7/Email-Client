@@ -39,7 +39,7 @@ const EmailList = () => {
               </div>
             ))}
         </div>
-        <div className="col-md-7 border-color px-4 py-2 rounded-2 bg-email">
+        <div className="col-md-7  ">
           <EmailBody email={emails[0]} />
         </div>
       </div>
