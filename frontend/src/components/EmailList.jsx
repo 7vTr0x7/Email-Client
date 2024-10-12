@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EmailCard from "./EmailCard";
+import EmailBody from "./EmailBody";
 
 const EmailList = () => {
   const [emails, setEmails] = useState([]);
@@ -38,7 +39,9 @@ const EmailList = () => {
               </div>
             ))}
         </div>
-        <div className="col-md-7"></div>
+        <div className="col-md-7 border-color px-4 py-2 rounded-2 bg-email">
+          <EmailBody email={emails[0]} />
+        </div>
       </div>
     </>
   );
