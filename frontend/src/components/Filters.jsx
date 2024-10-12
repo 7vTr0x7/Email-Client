@@ -3,7 +3,7 @@ import React from "react";
 const Filters = () => {
   return (
     <section>
-      <div className="d-flex gap-4">
+      <div className="d-flex gap-5 fw-semibold">
         <p>Filter By:</p>
         <p>Unread</p>
         <p>Read</p>
