@@ -3,9 +3,9 @@ import Filters from "../components/Filters";
 
 const Emails = () => {
   return (
-    <main className="mx-5 my-4">
+    <section className="px-5 py-4">
       <Filters />
-    </main>
+    </section>
   );
 };
 
