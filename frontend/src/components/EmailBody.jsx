@@ -2,6 +2,11 @@ import React, { useEffect } from "react";
 import { firstChar, getDate } from "../utils/constants";
 import { useState } from "react";
 import parse from "html-react-parser";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../redux/slices/emailSlice";
 
 const EmailBody = ({ email, closeEmailBodyHandler }) => {
   const [emailData, setEmailData] = useState(null);
@@ -9,6 +14,11 @@ const EmailBody = ({ email, closeEmailBodyHandler }) => {
   const char = firstChar(email);
 
   const time = getDate(email);
+
+  const dispatch = useDispatch();
+
+  const favorites = useSelector((state) => state.emails.favorites);
+  const exists = favorites.find((mail) => mail.id === email.id);
 
   const fetchEmail = async () => {
     try {
@@ -27,6 +37,13 @@ const EmailBody = ({ email, closeEmailBodyHandler }) => {
     fetchEmail();
   }, [email?.id]);
 
+  const removeHandler = (id) => {
+    dispatch(removeFromFavorites(id));
+  };
+  const addHandler = (email) => {
+    dispatch(addToFavorites(email));
+  };
+
   return (
     <>
       <div className="d-flex gap-4 py-4 px-4 border-color rounded-2 bg-email">
@@ -39,9 +56,19 @@ const EmailBody = ({ email, closeEmailBodyHandler }) => {
           <div className="d-flex justify-content-between align-items-center">
             <p className="m-0 fs-3 fw-semibold ">{email?.subject}</p>
             <div className="d-flex gap-3">
-              <p className="m-0 small border-0 px-3 py-1 bg-accent rounded-5 text-white pointer">
-                Mark as Favorite
-              </p>
+              {exists ? (
+                <p
+                  className="m-0 small border-0 px-3 py-1 bg-accent rounded-5 text-white pointer"
+                  onClick={() => removeHandler(email.id)}>
+                  Remove from Favorite
+                </p>
+              ) : (
+                <p
+                  className="m-0 small border-0 px-3 py-1 bg-accent rounded-5 text-white pointer"
+                  onClick={() => addHandler(email)}>
+                  Mark as Favorite
+                </p>
+              )}
               <p
                 className="m-0 small border-0 px-3 py-1 bg-accent rounded-5 text-white pointer"
                 onClick={closeEmailBodyHandler}>

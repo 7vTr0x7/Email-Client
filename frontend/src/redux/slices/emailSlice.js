@@ -5,7 +5,7 @@ const emailSlice = createSlice({
   initialState: {
     read: [],
     unread: [],
-    favorite: [],
+    favorites: [],
   },
   reducers: {
     addData: (state, action) => {
@@ -21,9 +21,24 @@ const emailSlice = createSlice({
         unread: state.unread.filter((email) => email.id !== action.payload),
       };
     },
+    addToFavorites: (state, action) => {
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    },
+    removeFromFavorites: (state, action) => {
+      return {
+        ...state,
+        favorites: state.favorites.filter(
+          (email) => email.id !== action.payload
+        ),
+      };
+    },
   },
 });
 
-export const { addData, updateUnread } = emailSlice.actions;
+export const { addData, updateUnread, addToFavorites, removeFromFavorites } =
+  emailSlice.actions;
 
 export default emailSlice.reducer;
