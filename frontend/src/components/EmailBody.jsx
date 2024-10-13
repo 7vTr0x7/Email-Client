@@ -3,7 +3,7 @@ import { firstChar, getDate } from "../utils/constants";
 import { useState } from "react";
 import parse from "html-react-parser";
 
-const EmailBody = ({ email }) => {
+const EmailBody = ({ email, closeEmailBodyHandler }) => {
   const [emailData, setEmailData] = useState(null);
 
   const char = firstChar(email);
@@ -38,9 +38,16 @@ const EmailBody = ({ email }) => {
         <div className="w-100">
           <div className="d-flex justify-content-between align-items-center">
             <p className="m-0 fs-3 fw-semibold ">{email?.subject}</p>
-            <p className="m-0 small border-0 px-3 py-1 bg-accent rounded-5 text-white">
-              Mark as Favorite
-            </p>
+            <div className="d-flex gap-3">
+              <p className="m-0 small border-0 px-3 py-1 bg-accent rounded-5 text-white pointer">
+                Mark as Favorite
+              </p>
+              <p
+                className="m-0 small border-0 px-3 py-1 bg-accent rounded-5 text-white pointer"
+                onClick={closeEmailBodyHandler}>
+                Close
+              </p>
+            </div>
           </div>
           <div>
             <p className="mb-0 mt-3">{time && time}</p>

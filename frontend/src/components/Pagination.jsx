@@ -9,7 +9,7 @@ const Pagination = ({
   return (
     <div className="d-flex my-4 gap-3 justify-content-center align-content-center">
       <p
-        className="bg-email  fw-semibold px-3 py-1 rounded-2"
+        className="bg-email  fw-semibold px-3 py-1 rounded-2 pointer"
         onClick={previousPageHandler}>
         Previous
       </p>
@@ -17,7 +17,7 @@ const Pagination = ({
         {page} / {Math.round(emailsLength / 6)}
       </p>
       <p
-        className="bg-email fw-semibold px-3 py-1 rounded-2"
+        className="bg-email fw-semibold px-3 py-1 rounded-2 pointer"
         onClick={nextPageHandler}>
         Next
       </p>

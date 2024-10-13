@@ -4,28 +4,11 @@ import EmailBody from "./EmailBody";
 import Pagination from "./Pagination";
 
 const EmailList = () => {
-  const [emails, setEmails] = useState([]);
   const [page, setPage] = useState(1);
   const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState({});
 
-  const fetchEmails = async () => {
-    try {
-      const res = await fetch("https://flipkart-email-mock.now.sh/");
-      if (!res.ok) {
-        console.log("failed to get emails");
-      }
-
-      const data = await res.json();
-      setEmails(data.list);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchEmails();
-  }, []);
+  const emails = {};
 
   const nextPageHandler = () => {
     if (page < Math.round(emails.length / 6)) {
@@ -44,6 +27,10 @@ const EmailList = () => {
     setSelectedEmail(email);
   };
 
+  const closeEmailBodyHandler = () => {
+    setIsEmailOpen(false);
+  };
+
   return (
     <>
       <div className={` ${isEmailOpen && "row"}  `}>
@@ -52,7 +39,11 @@ const EmailList = () => {
             {emails?.slice(page * 6 - 6, page * 6).map((email) => (
               <div
                 key={email.id}
-                className="mb-3 d-flex gap-3 border-color px-4 py-2 rounded-2 bg-email"
+                className={`mb-3 d-flex gap-3 border-color px-4 py-2 rounded-2 pointer ${
+                  isEmailOpen && selectedEmail.id === email.id
+                    ? "bg-email-open"
+                    : "bg-email"
+                }`}
                 onClick={() => clickHandler(email)}>
                 <EmailCard email={email} isEmailOpen={isEmailOpen} />
               </div>
@@ -69,7 +60,10 @@ const EmailList = () => {
         </div>
         {isEmailOpen && (
           <div className="col-md-7  ">
-            <EmailBody email={selectedEmail} />
+            <EmailBody
+              email={selectedEmail}
+              closeEmailBodyHandler={closeEmailBodyHandler}
+            />
           </div>
         )}
       </div>
