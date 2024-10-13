@@ -1,7 +1,7 @@
 import React from "react";
 import { firstChar, getDate } from "../utils/constants";
 
-const EmailCard = ({ email, isOpen }) => {
+const EmailCard = ({ email, isEmailOpen }) => {
   const char = firstChar(email);
 
   const time = getDate(email);
@@ -24,7 +24,7 @@ const EmailCard = ({ email, isOpen }) => {
           <span className="fw-semibold"> {email.subject}</span>
         </p>
         <p className="m-0">
-          {isOpen
+          {isEmailOpen
             ? `${email.short_description.slice(0, 50)}...`
             : email.short_description}
         </p>
