@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import EmailCard from "./EmailCard";
 import EmailBody from "./EmailBody";
 import Pagination from "./Pagination";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFetchEmails } from "../hooks/useFetchEmails";
+import { updateUnread } from "../redux/slices/emailSlice";
 
 const EmailList = () => {
   const [page, setPage] = useState(1);
@@ -12,10 +13,14 @@ const EmailList = () => {
 
   useFetchEmails();
 
-  const emails = useSelector((state) => state.emails.read);
+  const dispatch = useDispatch();
+
+  const filter = useSelector((state) => state.filter.filter);
+
+  const emails = useSelector((state) => state.emails[filter]);
 
   const nextPageHandler = () => {
-    if (page < Math.round(emails.length / 6)) {
+    if (page < Math.round(emails.length / 4)) {
       setPage((prev) => prev + 1);
     }
   };
@@ -27,6 +32,7 @@ const EmailList = () => {
   };
 
   const clickHandler = (email) => {
+    dispatch(updateUnread(email.id));
     setIsEmailOpen(true);
     setSelectedEmail(email);
   };
@@ -40,7 +46,7 @@ const EmailList = () => {
       <div className={` ${isEmailOpen && "row"}  `}>
         <div className={` ${isEmailOpen && "col-md-5"}  `}>
           <>
-            {emails?.slice(page * 6 - 6, page * 6).map((email) => (
+            {emails?.slice(page * 4 - 4, page * 4).map((email) => (
               <div
                 key={email.id}
                 className={`mb-3 d-flex gap-3 border-color px-4 py-2 rounded-2 pointer ${
