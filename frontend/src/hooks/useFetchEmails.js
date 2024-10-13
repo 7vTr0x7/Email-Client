@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addData } from "../redux/slices/emailSlice";
 
-export const useFetchEmails = () => {
+export const useFetchEmails = (page) => {
   const dispatch = useDispatch();
 
-  const fetchEmails = async () => {
+  const fetchEmails = async (page) => {
     try {
-      const res = await fetch("https://flipkart-email-mock.now.sh/");
+      const res = await fetch(
+        `https://flipkart-email-mock.vercel.app/?page=${page}`
+      );
       if (!res.ok) {
         console.log("failed to get emails");
       }
@@ -20,6 +22,6 @@ export const useFetchEmails = () => {
   };
 
   useEffect(() => {
-    fetchEmails();
-  }, []);
+    fetchEmails(page);
+  }, [page]);
 };

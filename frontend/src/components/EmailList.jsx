@@ -11,16 +11,17 @@ const EmailList = () => {
   const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState({});
 
-  useFetchEmails();
+  useFetchEmails(page);
 
   const dispatch = useDispatch();
 
   const filter = useSelector((state) => state.filter.filter);
 
   const emails = useSelector((state) => state.emails[filter]);
+  console.log(emails);
 
   const nextPageHandler = () => {
-    if (page < Math.round(emails.length / 4)) {
+    if (page < 2) {
       setPage((prev) => prev + 1);
     }
   };
@@ -43,26 +44,32 @@ const EmailList = () => {
 
   return (
     <>
-      <p>
-        {emails.length === 0 && (
+      <div>
+        {emails?.length === 0 && (
           <p className="text-center my-4  fw-semibold">{filter} is empty</p>
         )}
-      </p>
+      </div>
       <div className={` ${isEmailOpen && "row"}  `}>
         <div className={` ${isEmailOpen && "col-md-5"}  `}>
           <>
-            {emails?.slice(page * 4 - 4, page * 4).map((email) => (
-              <div
-                key={email.id}
-                className={`mb-3 d-flex gap-3 border-color px-4 py-2 rounded-2 pointer ${
-                  isEmailOpen && selectedEmail.id === email.id
-                    ? "bg-email-open"
-                    : "bg-email"
-                }`}
-                onClick={() => clickHandler(email)}>
-                <EmailCard email={email} isEmailOpen={isEmailOpen} />
-              </div>
-            ))}
+            {emails?.length > 0 &&
+              emails
+                ?.slice(
+                  (page - 1) * emails?.length - emails?.length,
+                  page * emails?.length
+                )
+                .map((email) => (
+                  <div
+                    key={email.id}
+                    className={`mb-3 d-flex gap-3 border-color px-4 py-2 rounded-2 pointer ${
+                      isEmailOpen && selectedEmail.id === email.id
+                        ? "bg-email-open"
+                        : "bg-email"
+                    }`}
+                    onClick={() => clickHandler(email)}>
+                    <EmailCard email={email} isEmailOpen={isEmailOpen} />
+                  </div>
+                ))}
             {emails?.length > 0 && (
               <Pagination
                 page={page}

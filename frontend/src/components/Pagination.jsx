@@ -13,10 +13,7 @@ const Pagination = ({
         onClick={previousPageHandler}>
         Previous
       </p>
-      <p className="bg-email fw-semibold px-3 py-1 rounded-2">
-        {page} /{" "}
-        {Math.round(emailsLength / 4) === 0 ? 1 : Math.round(emailsLength / 4)}
-      </p>
+      <p className="bg-email fw-semibold px-3 py-1 rounded-2">{page} / 2</p>
       <p
         className="bg-email fw-semibold px-3 py-1 rounded-2 pointer"
         onClick={nextPageHandler}>
