@@ -18,6 +18,9 @@
 .bg-accent {
   background-color: #e54065;
 }
+.text-accent {
+  color: #e54065;
+}
 
 .bg-email {
   background-color: white;

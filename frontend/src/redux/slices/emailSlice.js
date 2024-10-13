@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const emailSlice = createSlice({
   name: "emails",
   initialState: {
+    all: [],
     read: [],
     unread: [],
     favorites: [],
@@ -11,15 +12,21 @@ const emailSlice = createSlice({
     addData: (state, action) => {
       return {
         ...state,
-        read: action.payload,
         unread: action.payload,
+        all: action.payload,
       };
     },
     updateUnread: (state, action) => {
-      return {
-        ...state,
-        unread: state.unread.filter((email) => email.id !== action.payload),
-      };
+      const exists = state.read.find((email) => email.id === action.payload.id);
+      if (!exists) {
+        return {
+          ...state,
+          read: [...state.read, action.payload],
+          unread: state.unread.filter(
+            (email) => email.id !== action.payload.id
+          ),
+        };
+      }
     },
     addToFavorites: (state, action) => {
       return {

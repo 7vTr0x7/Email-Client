@@ -17,6 +17,13 @@ const Filters = () => {
         <p>Filter By:</p>
         <p
           className={`${
+            filter === "all" && "bg-filter  rounded-4 px-3 "
+          } pointer`}
+          onClick={() => changeHandler("all")}>
+          All
+        </p>
+        <p
+          className={`${
             filter === "unread" && "bg-filter  rounded-4 px-3 "
           } pointer`}
           onClick={() => changeHandler("unread")}>

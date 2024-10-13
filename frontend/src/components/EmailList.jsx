@@ -18,7 +18,7 @@ const EmailList = () => {
   const filter = useSelector((state) => state.filter.filter);
 
   const emails = useSelector((state) => state.emails[filter]);
-  console.log(emails);
+  const readEmails = useSelector((state) => state.emails.read);
 
   const nextPageHandler = () => {
     if (page < 2) {
@@ -33,7 +33,7 @@ const EmailList = () => {
   };
 
   const clickHandler = (email) => {
-    dispatch(updateUnread(email.id));
+    dispatch(updateUnread(email));
     setIsEmailOpen(true);
     setSelectedEmail(email);
   };
@@ -65,12 +65,15 @@ const EmailList = () => {
                       isEmailOpen && selectedEmail.id === email.id
                         ? "bg-email-open"
                         : "bg-email"
+                    }  ${
+                      readEmails.find((mail) => mail.id === email.id) &&
+                      " bg-read-email "
                     }`}
                     onClick={() => clickHandler(email)}>
                     <EmailCard email={email} isEmailOpen={isEmailOpen} />
                   </div>
                 ))}
-            {filter !== "favorites" && emails?.length > 0 && (
+            {filter === "all" && emails?.length > 0 && (
               <Pagination
                 page={page}
                 previousPageHandler={previousPageHandler}

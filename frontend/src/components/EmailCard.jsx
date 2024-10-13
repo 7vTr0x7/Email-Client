@@ -1,8 +1,12 @@
 import React from "react";
 import { firstChar, getDate } from "../utils/constants";
+import { useSelector } from "react-redux";
 
 const EmailCard = ({ email, isEmailOpen }) => {
   const char = firstChar(email);
+
+  const favorites = useSelector((state) => state.emails.favorites);
+  const exists = favorites.find((mail) => mail.id === email.id);
 
   const time = getDate(email);
 
@@ -28,7 +32,12 @@ const EmailCard = ({ email, isEmailOpen }) => {
             ? `${email.short_description.slice(0, 50)}...`
             : email.short_description}
         </p>
-        <p className="mb-0 mt-1 small">{time}</p>
+        <div className="d-flex gap-4">
+          <p className="mb-0 mt-1 small">{time}</p>
+          <p className="mb-0 mt-1 small fw-semibold text-accent">
+            {exists && "favorite"}
+          </p>
+        </div>
       </div>
     </>
   );
