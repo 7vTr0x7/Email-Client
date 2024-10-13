@@ -43,6 +43,11 @@ const EmailList = () => {
 
   return (
     <>
+      <p>
+        {emails.length === 0 && (
+          <p className="text-center my-4  fw-semibold">{filter} is empty</p>
+        )}
+      </p>
       <div className={` ${isEmailOpen && "row"}  `}>
         <div className={` ${isEmailOpen && "col-md-5"}  `}>
           <>
@@ -68,7 +73,7 @@ const EmailList = () => {
             )}
           </>
         </div>
-        {isEmailOpen && (
+        {emails?.length > 0 && isEmailOpen && (
           <div className="col-md-7  ">
             <EmailBody
               email={selectedEmail}
