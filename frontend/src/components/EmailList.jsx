@@ -70,7 +70,7 @@ const EmailList = () => {
                     <EmailCard email={email} isEmailOpen={isEmailOpen} />
                   </div>
                 ))}
-            {emails?.length > 0 && (
+            {filter !== "favorites" && emails?.length > 0 && (
               <Pagination
                 page={page}
                 previousPageHandler={previousPageHandler}
