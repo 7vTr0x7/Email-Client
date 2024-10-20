@@ -49,7 +49,9 @@ const Filters = () => {
           className={`${
             filter === "favorites" && "bg-filter  rounded-4 px-3 "
           } pointer`}
-          onClick={() => navigate("https://charts-v1.vercel.app")}>
+          onClick={() =>
+            (window.location.href = "https://charts-v1.vercel.app")
+          }>
           Data Visualization
         </p>
       </div>
