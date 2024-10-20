@@ -1,9 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeFilter } from "../redux/slices/filterSlice";
+import { useNavigate } from "react-router-dom";
 
 const Filters = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const filter = useSelector((state) => state.filter.filter);
 
@@ -42,6 +44,13 @@ const Filters = () => {
           } pointer`}
           onClick={() => changeHandler("favorites")}>
           Favorites
+        </p>
+        <p
+          className={`${
+            filter === "favorites" && "bg-filter  rounded-4 px-3 "
+          } pointer`}
+          onClick={() => navigate("https://charts-v1.vercel.app")}>
+          Data Visualization
         </p>
       </div>
     </section>
