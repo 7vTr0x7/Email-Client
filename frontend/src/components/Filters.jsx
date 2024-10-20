@@ -1,11 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeFilter } from "../redux/slices/filterSlice";
-import { useNavigate } from "react-router-dom";
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const filter = useSelector((state) => state.filter.filter);
 
